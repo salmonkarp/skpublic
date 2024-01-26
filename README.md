@@ -1,2 +1,2 @@
-# ckpublic
-Code for Cookies Kingdom's public website
+# skpublic
+Code for my public website
