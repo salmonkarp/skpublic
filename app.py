@@ -23,7 +23,7 @@ app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 app.config['MAIL_USERNAME'] = 'garyaxelmuliyono@gmail.com'  # Replace with your Gmail address
-app.config['MAIL_PASSWORD'] = os.environ['MAILPSWD']   # Replace with your Gmail password
+app.config['MAIL_PASSWORD'] = "aaa"   # Replace with your Gmail password
 app.config['MAIL_DEFAULT_SENDER'] = 'garyaxelmuliyono@gmail.com'  # Replace with your Gmail address
 
 mail = Mail(app)
@@ -45,7 +45,7 @@ def root():
                     item['description'] = item['description'].split('|')[2]
         db.close()
         print(get_flashed_messages())
-        return render_template('Home.html',expData = expData, eduData = eduData, messages = get_flashed_messages())
+        return render_template('home.html',expData = expData, eduData = eduData, messages = get_flashed_messages())
     else:
         full_name = request.form.get('fullName')
         email = request.form.get('email')

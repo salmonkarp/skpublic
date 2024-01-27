@@ -3,12 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@salmonkarp</title>
+    <title>salmonkarp</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="/static/home.css" rel="stylesheet">
+    <link rel="icon" href="static/images/logo.ico" type="image/ico">
   </head>
-  <bod>
+  <body>
     <!-- Header -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
       <div class="container">
@@ -19,16 +20,16 @@
         <div class="collapse navbar-collapse" id="header">
           <ul class="navbar-nav">
             <li class="navbar-item">
-              <a href="#" class="nav-link" onclick="jumpToSlide(0)">about me</a>
+              <a href="#" class="nav-link" onclick="showSection('about')">about me</a>
             </li>
             <li class="navbar-item">
-              <a href="#" class="nav-link" onclick="jumpToSlide(1)">stuff</a>
+              <a href="#" class="nav-link" onclick="showSection('stuff')">stuff</a>
             </li>
             <li class="navbar-item">
-              <a href="#" class="nav-link" onclick="jumpToSlide(2)">contact</a>
+              <a href="#" class="nav-link" onclick="showSection('contact')">contact</a>
             </li>
             <li class="navbar-item">
-              <a href="#" class="nav-link" onclick="jumpToSlide(3)">socials</a>
+              <a href="#" class="nav-link" onclick="showSection('socials')">socials</a>
             </li>
           </ul>
         </div>
@@ -36,148 +37,143 @@
     </nav>
     <div id="status-alert" class="alert" role="alert" style="display: none;"></div>
 
-    <div id="portfolioCarousel" class="carousel">
-      <div class="carousel-inner">
-    
-        <!-- Profile Slide -->
-        <div class="carousel-item active" style="height: 90vh;">
-          <div class="d-flex align-items-center justify-content-center h-100">
-              <div class="card mx-auto" style="max-width: 540px;" id="about">
-                  <div class="row g-0">
-                      <div class="col-lg-4 text-center ">
-                          <img src="/static/images/profile.jpg" class="img-fluid rounded" style="width: 100%; height: 100%; max-width: 200px; max-height:200px">
-                      </div>
-                      <div class="col-lg-8">
-                          <div class="card-body">
-                              <h5 class="card-title">@salmonkarp</h5>
-                              <p class="card-text">
-                                  student, website developer, and occasional non-fiction writer (2004)
-                                  'you've gotta believe in the poetry' - ali muhammad.<br> <br>
-                                  he/they.
-                              </p>
-                          </div>
-                      </div>
-                  </div>
+    <!-- About -->
+    <div id="about" class="section">
+      <div class="d-flex align-items-center justify-content-center vh-100">
+        <div class="card mx-auto" style="max-width: 540px;">
+          <div class="row g-0">
+            <div class="col-lg-4 text-center">
+              <img src="/static/images/profile.jpg" class="img-fluid rounded" style="width: 100%; height:100%; max-width: 200px; max-height: 200px;">
+            </div>
+            <div class="col-lg-8">
+              <div class="card-body">
+                <h5 class="card-title">@salmonkarp</h5>
+                <p class="card-text">
+                  student, website developer, and occasional non-fiction writer (2004)
+                  'you've gotta believe in the poetry' - ali muhammad.<br><br>
+                  he/they.
+                </p>
               </div>
+            </div>
           </div>
+        </div>
       </div>
-    
-        <!-- Portfolio Slide -->
-        <div class="carousel-item">
-          <div class="container mt-2 mb-5 mx-auto overflow-auto " style="max-width: 1000px;" id="stuff">
-            <!-- Experience Section -->
-            <div class="mt-5">
-              <h4>stuff i've done</h4>
-              
-              {% for exp in expData %}
-              <!-- Experience Item 1 -->
-              <div class="card mb-3 bg-light ">
-                <div class="row g-0">
-                  <div class="col-md-2 p-1 text-center d-flex align-items-center justify-content-center">
-                    <img src="{{exp['imageLink']}}" class="img-fluid rounded-start" alt="Experience 1" style="max-height:100px">
-                  </div>
-                  <div class="col-md-8">
-                    <div class="card-body">
-                      <h5 class="card-title">{{exp['name']}}</h5>
-                      <p class="card-text">{{exp['company']}} | {{exp['location']}} | {{exp['dateRange']}}</p>
-                      {% if exp['link'] %}
-                          {{exp['description']}} <br>
-                          <a href="{{ exp['link'] }}">{{ exp['label'] }}</a>
-                      {% elif exp['description'] %}
-                          {{ exp['description'] }}
-                      {% endif %}
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {% endfor %}
-
-          
-            </div>
-            
-            <!-- Education Section -->
-            <div class="mt-5">
-              <h4>places i've been</h4>
-              
-              {% for exp in eduData %}
-              <!-- Education Item 1 -->
-              <div class="card mb-3">
-                <div class="row g-0">
-                  <div class="col-md-2 p-1 text-center d-flex align-items-center justify-content-center">
-                    <img src="{{exp['imageLink']}}" class="img-fluid rounded-start" alt="Experience 1" style="max-height:100px">
-                  </div>
-                  <div class="col-md-8">
-                    <div class="card-body">
-                      <h5 class="card-title">{{exp['name']}}</h5>
-                      <p class="card-text">{{exp['location']}} | {{exp['dateRange']}}</p>
-                      
-                      {% if exp['link'] %}
-                      <p class="card-text">{{exp['description']}}</p>
-                      <a href="{{ exp['link'] }}">{{ exp['label'] }}</a>
-                      {% elif exp['description'] %}
-                      <p class="card-text">{{ exp['description'] }}</p>
-                      {% endif %}
-                      
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {% endfor %}
-          
-            </div>
-          </div>
-        </div>
-    
-        <!-- Contact Form Slide -->
-        <div class="carousel-item">
-          <div class="container mt-5 mx-auto" style="max-width:400p" id="contact">
-            <!-- Contact Form -->
-            <div class="container mt-5 mx-auto" style="max-width:400px" id="contact">
-              <h2>contact me</h2>
-              <form action="/" method="post" enctype="multipart/form-data" id="contact-form">
-                <div class="mb-3 form-floating">
-                  <input type="text" class="form-control" id="fullName" placeholder="your full name" name="fullName" required>
-                  <label for="fullName" class="form-label">full name</label>
-                </div>
-                <div class="mb-3 form-floating">
-                  <input type="email" class="form-control" id="email" placeholder="your email" name="email" required>
-                  <label for="email" class="form-label">email address</label>
-                </div>
-                <div class="mb-3">
-                  <textarea class="form-control" id="message" rows="5" placeholder="your message" name="message"></textarea>
-                </div>
-                <input type="submit" class="btn btn-dark"></input>
-              </form>
-            </div>
-          </div>
-        </div>
-        
-        <div class="carousel-item">
-            <div class="container d-flex flex-column align-items-center justify-content-center vh-100 above-center">
-                <h2 class="mb-4">my socials</h2>
-                <div class="container d-flex justify-content-center">
-                    <a class="rounded-button mx-2" href="https://medium.com/@salmonkarp"><i class="fab fa-medium fa-2x"></i></a>
-                    <a class="rounded-button mx-2" href="https://www.instagram.com/garyam.alt/"><i class="fab fa-instagram fa-2x"></i></a>
-                    <a class="rounded-button mx-2" href="https://github.com/salmonkarp"><i class="fab fa-github fa-2x"></i></a>
-                </div>
-            </div>
-        </div>
-      
-      </div>
-    
     </div>
 
-    
-    
-    
+    <!-- Stuff -->
+    <div class="section" id="stuff"  style="display:none">
+      <div class="container mt-2 mb-5 mx-auto overflow-auto " style="max-width: 1000px;" id="stuff">
+        <!-- Experience Section -->
+        <div class="mt-5">
+          <h4>stuff i've done</h4>
+          
+          {% for exp in expData %}
+          <!-- Experience Item 1 -->
+          <div class="card mb-3 bg-light ">
+            <div class="row g-0">
+              <div class="col-md-2 p-1 text-center d-flex align-items-center justify-content-center">
+                <img src="{{exp['imageLink']}}" class="img-fluid rounded-start" alt="Experience 1" style="max-height:100px">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{exp['name']}}</h5>
+                  <p class="card-text">{{exp['company']}} | {{exp['location']}} | {{exp['dateRange']}}</p>
+                  {% if exp['link'] %}
+                      {{exp['description']}} <br>
+                      <a href="{{ exp['link'] }}">{{ exp['label'] }}</a>
+                  {% elif exp['description'] %}
+                      {{ exp['description'] }}
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
 
+      
+        </div>
+        
+        <!-- Education Section -->
+        <div class="mt-5">
+          <h4>places i've been</h4>
+          
+          {% for exp in eduData %}
+          <!-- Education Item 1 -->
+          <div class="card mb-3">
+            <div class="row g-0">
+              <div class="col-md-2 p-1 text-center d-flex align-items-center justify-content-center">
+                <img src="{{exp['imageLink']}}" class="img-fluid rounded-start" alt="Experience 1" style="max-height:100px">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{exp['name']}}</h5>
+                  <p class="card-text">{{exp['location']}} | {{exp['dateRange']}}</p>
+                  
+                  {% if exp['link'] %}
+                  <p class="card-text">{{exp['description']}}</p>
+                  <a href="{{ exp['link'] }}">{{ exp['label'] }}</a>
+                  {% elif exp['description'] %}
+                  <p class="card-text">{{ exp['description'] }}</p>
+                  {% endif %}
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+      
+        </div>
+      </div>
+    </div>
+    
+    <!-- Contact -->
+    <div class="section" id="contact"  style="display:none">
+      <div class="container mt-5 mx-auto" style="max-width:400p" id="contact">
+        <!-- Contact Form -->
+        <div class="container mt-5 mx-auto" style="max-width:400px" id="contact">
+          <h2>contact me</h2>
+          <form action="/" method="post" enctype="multipart/form-data" id="contact-form">
+            <div class="mb-3 form-floating">
+              <input type="text" class="form-control" id="fullName" placeholder="your full name" name="fullName" required>
+              <label for="fullName" class="form-label">full name</label>
+            </div>
+            <div class="mb-3 form-floating">
+              <input type="email" class="form-control" id="email" placeholder="your email" name="email" required>
+              <label for="email" class="form-label">email address</label>
+            </div>
+            <div class="mb-3">
+              <textarea class="form-control" id="message" rows="5" placeholder="your message" name="message"></textarea>
+            </div>
+            <input type="submit" class="btn btn-dark"></input>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Socials -->
+    <div class="section" id="socials" style="display: none;">
+      <div class="container d-flex flex-column align-items-center justify-content-center min-vh-100" style="overflow:hidden">
+        <h2 class="mb-4">my socials</h2>
+        <div class="d-flex justify-content-center">
+          <a class="rounded-button mx-2" href="https://medium.com/@salmonkarp"><i class="fab fa-medium fa-2x"></i></a>
+          <a class="rounded-button mx-2" href="https://www.instagram.com/garyam.alt/"><i class="fab fa-instagram fa-2x"></i></a>
+          <a class="rounded-button mx-2" href="https://github.com/salmonkarp"><i class="fab fa-github fa-2x"></i></a>
+        </div>
+      </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
+
   <script>
-    function jumpToSlide(slideIndex) {
-      var myCarousel = new bootstrap.Carousel(document.getElementById('portfolioCarousel'));
-      myCarousel.to(slideIndex);
+    function showSection(sectionId) {
+      // Hide all sections
+      document.querySelectorAll('.section').forEach(function (section) {
+        section.style.display = 'none';
+      });
+
+      // Show the selected section
+      document.getElementById(sectionId).style.display = 'block';
     }
     document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('contact-form').addEventListener('submit', function(event) {

@@ -39,3 +39,13 @@ body::before {
     position:relative;
     top: -50px;
 }
+
+#about, #socials {
+    overflow: hidden;
+}
+
+#about .section,
+#socials .section {
+    max-height: 50vh; /* Set a maximum height equal to the viewport height */
+    overflow-y: auto; /* Enable vertical scrolling if needed */
+}
