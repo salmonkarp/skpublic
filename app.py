@@ -23,7 +23,7 @@ app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 app.config['MAIL_USERNAME'] = 'garyaxelmuliyono@gmail.com'  # Replace with your Gmail address
-app.config['MAIL_PASSWORD'] = os.environ['vkeq mnsd hcvf ogan']   # Replace with your Gmail password
+app.config['MAIL_PASSWORD'] = os.environ['MAILPSWD']   # Replace with your Gmail password
 app.config['MAIL_DEFAULT_SENDER'] = 'garyaxelmuliyono@gmail.com'  # Replace with your Gmail address
 
 mail = Mail(app)
